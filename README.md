@@ -9,3 +9,13 @@ Detection of Cyber-bullying Using Image Processing
 
 ### todo
 - [ ] find out how to extract regions that has the difference after subtracting them 
+
+
+```
+Daniel Jedidiah Antonio
+15068893
+```
+Supervised by
+```
+Dr. Chia Wai Chong
+```
