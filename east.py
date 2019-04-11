@@ -120,5 +120,5 @@ def recognize_text(image, min_confidence=0.5, height=960, width=544, padding=0.0
     return roi
     
 
-img = cv2.imread("east/img/test3.png")
-recognize_text(img)
+# img = cv2.imread("east/img/test3.png")
+# recognize_text(img)
