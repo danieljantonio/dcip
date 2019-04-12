@@ -4,7 +4,10 @@ import numpy as np
 from imutils import resize
 
 
-def detect_changes(frame_prev, frame_curr, new_w=960, new_h=544):
+def detect_changes(frame_curr, frame_prev=0, new_w=960, new_h=544):
+    if (type(frame_prev) == "<class 'numpy.ndarray'>"):
+        frame_prev = np.array((1,1,3))
+    print(type(frame_prev))
     original_frame = frame_curr.copy()
     (frame_h, frame_w) = original_frame.shape[:2]
     ratio_h = frame_h / new_h
@@ -42,7 +45,7 @@ def detect_changes(frame_prev, frame_curr, new_w=960, new_h=544):
 # img1 = cv2.imread('east/img/frame1.png')
 # img2 = cv2.imread('east/img/frame2.png')
 
-# roi = detect_changes(img1, img2)
+# roi = detect_changes(img2, img1)
 
 # for img in roi:
 #     cv2.imshow('img', img)
