@@ -1,3 +1,16 @@
+### 17/4 
+- added non_max_suppression to bg_changes
+- work from home -> tested on 2 monitors
+- added east_resize to calculate the size of the image, divide it by 3, and make sure that its divisible by 32
+
+### 12/4
+- tried using pyscreenshot to record the screen
+- trying to figure out how to screenshot every 2 seconds
+- started combining east and bg_changes
+- changed bg_changes to be able to receive no prev image
+- tried using the bg_changes in main with the screen record, dilate shows white, grey, and black for some reason, still trying to figure out the missing link
+
+
 ### 11/4
 - finished adding bg_changes detect_changes function
 - resize image to smaller size
