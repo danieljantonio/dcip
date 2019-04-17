@@ -7,7 +7,6 @@ from imutils import resize
 def detect_changes(frame_curr, frame_prev=0, new_w=960, new_h=544):
     if (type(frame_prev) == "<class 'numpy.ndarray'>"):
         frame_prev = np.array((1,1,3))
-    print(type(frame_prev))
     original_frame = frame_curr.copy()
     (frame_h, frame_w) = original_frame.shape[:2]
     ratio_h = frame_h / new_h
@@ -27,17 +26,24 @@ def detect_changes(frame_curr, frame_prev=0, new_w=960, new_h=544):
 
     kernel = np.ones((9,9), np.uint8)
     dilate = cv2.dilate(fgmask, kernel, iterations=2)
+    closing = cv2.morphologyEx(dilate, cv2.MORPH_CLOSE, kernel)
 
-    contours,_ = cv2.findContours(dilate, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    contours,_ = cv2.findContours(closing, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    print("Contours found = {}".format(len(contours)))
     for cnt in contours:
         x, y, w, h = cv2.boundingRect(cnt)
-        cv2.rectangle(img2, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
         start_x = int(x * ratio_w)
         start_y = int(y * ratio_h)
         end_x = int((x+w) * ratio_w)
         end_y = int((y+h) * ratio_h)
 
+        rects.append((start_x, start_y, end_x, end_y))
+    
+    boxes = non_max_suppression(np.array(rects))
+
+    for (start_x, start_y, end_x, end_y) in boxes:
+        cv2.rectangle(frame1, (start_x, start_y), (end_x, end_y), (0, 255, 0), 2)
         roi.append(original_frame[start_y:end_y, start_x:end_x])
     return roi
 
