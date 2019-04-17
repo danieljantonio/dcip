@@ -4,7 +4,7 @@ import numpy as np
 from imutils import resize
 
 
-def detect_changes(frame_curr, frame_prev=0, new_w=960, new_h=544):
+def detect_changes(frame_curr, frame_prev=0, new_h=544, new_w=960):
     if (type(frame_prev) == "<class 'numpy.ndarray'>"):
         frame_prev = np.array((1,1,3))
     original_frame = frame_curr.copy()
@@ -29,7 +29,7 @@ def detect_changes(frame_curr, frame_prev=0, new_w=960, new_h=544):
     closing = cv2.morphologyEx(dilate, cv2.MORPH_CLOSE, kernel)
 
     contours,_ = cv2.findContours(closing, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    print("Contours found = {}".format(len(contours)))
+    # print("Contours found = {}".format(len(contours)))
     for cnt in contours:
         x, y, w, h = cv2.boundingRect(cnt)
 
