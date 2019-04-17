@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-def resize(img):
+def resize32(img):
     if (len(img.shape) == 3):
         (H,W) = img.shape[:2]
     else:
