@@ -13,3 +13,14 @@ def resize32(img):
     if (w%32 != 0): 
         w = w + (32 - (w%32))
     return (h,w)
+
+def roi_resize32(img):
+    if (len(img.shape) == 3):
+        (H,W) = img.shape[:2]
+    else:
+        (H,W) = img.shape
+    if (H%32 != 0): 
+        H = H + (32 - (H%32))
+    if (W%32 != 0): 
+        W = W + (32 - (W%32))
+    return (H,W)

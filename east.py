@@ -6,7 +6,7 @@ import argparse
 import time
 import cv2
 
-def recognize_text(image, min_confidence=0.5, height=960, width=544, padding=0.05):
+def detect_text(image, min_confidence=0.5, height=960, width=544, padding=0.05):
     if (height%32 != 0 or width%32 !=0):
         height=960
         width=544
@@ -34,16 +34,13 @@ def recognize_text(image, min_confidence=0.5, height=960, width=544, padding=0.0
     "feature_fusion/concat_3"
     ]
     
-    print("[info] loading EAST text detector...")
+    # print("[info] loading EAST text detector...")
     net = cv2.dnn.readNet("east/frozen_east_text_detection.pb")
 
     blob = cv2.dnn.blobFromImage(image, 1.0, (W, H), (123.68, 116.78, 103.94), swapRB=True, crop=False) # pre-trained RGB mean values
     start = time.time()
     net.setInput(blob)
     (scores, geometry) = net.forward(layerNames)
-    end = time.time()
-
-    print("[INFO] text detection took {:.6f} seconds".format(end-start))
 
     # get rows and cols from the scores
     # initialize the variable to store the rectangles and confidences
@@ -113,12 +110,11 @@ def recognize_text(image, min_confidence=0.5, height=960, width=544, padding=0.0
 
         # ret, roiBinary = cv2.threshold(roi, 100, 255, cv2.THRESH_BINARY)
         roi.append(original_image[startY:endY, startX:endX])
+    cv2.imshow('img', image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
         
-    end = time.time()
+    # end = time.time()
 
-    print("[INFO] text detection took {:.6f} seconds".format(end-start))
-    return roi
-    
-
-# img = cv2.imread("east/img/test3.png")
-# recognize_text(img)
+    # print("[INFO] text detection took {:.6f} seconds".format(end-start))
+    return (roi, image)
