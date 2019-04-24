@@ -1,7 +1,17 @@
+### 23/4
+- discovered a list of bad words that are banned by google, youtube, and facebook from https://www.freewebheaders.com that contains more than 1000 profanity words
+- discovered a shorter list of words from the same website
+- discovered a different list of bad words from cs.cmu.edu that contains over 1000 profanity words
+- included tesseract_ocr in the main function, currently it still takes a bit too long
+
 ### 17/4 
 - added non_max_suppression to bg_changes
 - work from home -> tested on 2 monitors
 - added east_resize to calculate the size of the image, divide it by 3, and make sure that its divisible by 32
+- changed function names
+- added ocr functions to tesseract_ocr
+- preparing the functions to be combined (bg_changes ROIs and detect_text)
+
 
 ### 12/4
 - tried using pyscreenshot to record the screen
