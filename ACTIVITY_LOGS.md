@@ -1,3 +1,21 @@
+### 3/5
+- calculated the average time of bg_changes, which is under 0.11 seconds and averaged around 0.09 seconds
+
+### 2/5
+- researched on python multithreading and multiprocessing
+
+### 25/4
+- trying a good thresholding in order to reverse white text with black background
+- used np.mean in order to have a different thresholding when the background is black and the text is white
+- when using cv2.THRESH_BINARY_INV, the text is outlined by a white border
+- the reason for the border is because the text is being smoothed and its not all white, hence the reason for the outline border
+- found this link https://medium.freecodecamp.org/getting-started-with-tesseract-part-ii-f7f9a0899b3f 
+
+### 24/4
+- attempted to use cv2.cvtColor to conver the image to grayscale, then used adaptive thresholding in order to get a binary image
+- to be done (send binary image to be used for the EAST detection, need to calibrate the functions)
+
+
 ### 23/4
 - discovered a list of bad words that are banned by google, youtube, and facebook from https://www.freewebheaders.com that contains more than 1000 profanity words
 - discovered a shorter list of words from the same website
