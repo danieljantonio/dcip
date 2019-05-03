@@ -24,3 +24,10 @@ def roi_resize32(img):
     if (W%32 != 0): 
         W = W + (32 - (W%32))
     return (H,W)
+
+def double_up(img):
+    if (len(img.shape) == 3):
+        (H,W) = img.shape[:2]
+    else:
+        (H,W) = img.shape
+    return (H*2,W*2)
