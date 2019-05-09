@@ -4,15 +4,15 @@ import numpy as np
 from imutils import resize
 from time import time, sleep
 
-def background_changes(frame_curr, frame_prev, new_h=544, new_w=960):
+def background_changes(new_frame, previous_frame, new_h=544, new_w=960):
     fnStart = time()
-    original_frame = frame_curr.copy()
+    original_frame = new_frame.copy()
     (frame_h, frame_w) = original_frame.shape[:2]
     ratio_h = frame_h / new_h
     ratio_w = frame_w / new_w
 
-    frame1 = cv2.resize(frame_prev, (new_w, new_h))
-    frame2 = cv2.resize(frame_curr, (new_w, new_h))
+    frame1 = cv2.resize(previous_frame, (new_w, new_h))
+    frame2 = cv2.resize(new_frame, (new_w, new_h))
 
     fgbg = cv2.createBackgroundSubtractorMOG2()
 
@@ -23,12 +23,21 @@ def background_changes(frame_curr, frame_prev, new_h=544, new_w=960):
 
     fgmask = fgbg.apply(frame1)
     fgmask = fgbg.apply(frame2)
+    # cv2.imshow('fgmask', fgmask)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
-    kernel = np.ones((5,9), np.uint8)
+    kernel = np.ones((3,5), np.uint8)
     dilate = cv2.dilate(fgmask, kernel, iterations=2)
+    # cv2.imshow('dilate1', dilate)
     closing = cv2.morphologyEx(dilate, cv2.MORPH_CLOSE, kernel)
-    erode = cv2.erode(fgmask, kernel, iterations=5)
+    # cv2.imshow('closing', closing)
+    erode = cv2.erode(closing, kernel, iterations=7)
+    # cv2.imshow('erode', erode)
     dilate = cv2.dilate(erode, kernel, iterations=2)
+    # cv2.imshow('dilate2', dilate)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     contours,_ = cv2.findContours(dilate, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     # rectsimg = original_frame.copy()
