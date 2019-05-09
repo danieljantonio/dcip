@@ -5,4 +5,5 @@ def grab():
     with mss() as sct:
         monitor = sct.monitors[1]
         sct_img = sct.grab(monitor)
-        return np.array(sct_img)
+        sct_img = np.array(sct_img)
+        return sct_img[:,:,:3]

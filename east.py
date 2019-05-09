@@ -6,10 +6,10 @@ import argparse
 import time
 import cv2
 
-def detect_text(image, min_confidence=0.5, height=960, width=544, padding=0.05):
-    if (height%32 != 0 or width%32 !=0):
-        height=960
-        width=544
+from screenshot import grab
+
+def detect_text(image, height=544, width=960, min_confidence=0.5, padding=0.05):
+    start = time.time()
     
     # save a copy of the image
     original_image = image.copy()
@@ -30,15 +30,14 @@ def detect_text(image, min_confidence=0.5, height=960, width=544, padding=0.05):
     # one to output probabilities
     # one to derive bounding box of the text
     layerNames = [
-    "feature_fusion/Conv_7/Sigmoid",
-    "feature_fusion/concat_3"
+        "feature_fusion/Conv_7/Sigmoid",
+        "feature_fusion/concat_3"
     ]
     
-    # print("[info] loading EAST text detector...")
+    print("[info] loading EAST text detector...")
     net = cv2.dnn.readNet("east/frozen_east_text_detection.pb")
 
     blob = cv2.dnn.blobFromImage(image, 1.0, (W, H), (123.68, 116.78, 103.94), swapRB=True, crop=False) # pre-trained RGB mean values
-    start = time.time()
     net.setInput(blob)
     (scores, geometry) = net.forward(layerNames)
 
@@ -90,7 +89,6 @@ def detect_text(image, min_confidence=0.5, height=960, width=544, padding=0.05):
     roi = []
     # loop through bounding boxes
     for (startX, startY, endX, endY) in boxes:
-        cv2.rectangle(image, (startX, startY), (endX, endY), (0, 255, 0), 2)
 
         # scale the bounding boxes based on the ratios
         startX = int(startX * ratio_w)
@@ -108,13 +106,24 @@ def detect_text(image, min_confidence=0.5, height=960, width=544, padding=0.05):
         endX = min(origW, endX + (dX * 2))
         endY = min(origH, endY + (dY * 2))
 
+        # cv2.rectangle(image, (startX, startY), (endX, endY), (0, 255, 0), 2)
         # ret, roiBinary = cv2.threshold(roi, 100, 255, cv2.THRESH_BINARY)
         roi.append(original_image[startY:endY, startX:endX])
-    cv2.imshow('img', image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+        # todo
+        # try and resize the images in the roi for better ocr, rever to https://medium.freecodecamp.org/getting-started-with-tesseract-part-ii-f7f9a0899b3f for possible optimizations
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
         
-    # end = time.time()
+    end = time.time()
 
-    # print("[INFO] text detection took {:.6f} seconds".format(end-start))
+    print("[INFO] text detection took {:.6f} seconds".format(end-start))
     return (roi, image)
+
+# img = grab()
+# print(img.shape)
+
+# rois, img = detect_text(img)
+# for img in rois:
+#     cv2.imshow('img', img)
+#     cv2.waitKey(0)
+#     cv2.destroyAllWindows()

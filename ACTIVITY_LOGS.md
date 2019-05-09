@@ -1,5 +1,22 @@
+### 9/5
+- removed useless functions from east_resize
+- resize32 function now requires an n parameter for the divisible value of the image
+- screenshot.grab() now returns the proper image dimensions for EAST as previously it returned an image of a `[1080, 1920, 4]` dimension 
+east now works properly
+east_resize now only contains resize32 function, and requires an n parameter for what is to be divided
+screenshot.grab() now returns the proper dimensions for the image that could be processed by east
+
+### 8/5
+- ImageGrab is takes a minimum of 0.3 seconds for each screenshot, this is now converted with python mss function to screenshot which takes at most 0.11 seconds for each screenshot
+- improved the bg_changes by applying additional dilation and erosion to the mask, the erosion has also been increased in order to reduce the overall roi and remove any false positives
+
+### 6/5
+- may have found a better way to use EAST text detector https://www.learnopencv.com/deep-learning-based-text-detection-using-opencv-c-python/
+- https://cloud.google.com/vision/docs/ocr check out google's text detector
+
 ### 3/5
 - calculated the average time of bg_changes, which is under 0.11 seconds and averaged around 0.09 seconds
+- researching on a way to combine small contours into one big contour
 
 ### 2/5
 - researched on python multithreading and multiprocessing
