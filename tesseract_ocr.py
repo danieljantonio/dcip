@@ -3,7 +3,7 @@ import cv2
 from time import time
 
 def recognize_text(img):
-    text = pyt.image_to_string(thresh)
+    text = pyt.image_to_string(img)
     sentences = text.split("\n")
     texts = []
     for sentence in sentences:

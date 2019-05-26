@@ -87,6 +87,7 @@ def detect_text(image, height=544, width=960, min_confidence=0.5, padding=0.05):
     boxes = non_max_suppression(np.array(rects), probs=conf)
 
     roi = []
+    image = original_image.copy()
     # loop through bounding boxes
     for (startX, startY, endX, endY) in boxes:
 
@@ -106,7 +107,7 @@ def detect_text(image, height=544, width=960, min_confidence=0.5, padding=0.05):
         endX = min(origW, endX + (dX * 2))
         endY = min(origH, endY + (dY * 2))
 
-        # cv2.rectangle(image, (startX, startY), (endX, endY), (0, 255, 0), 2)
+        cv2.rectangle(image, (startX, startY), (endX, endY), (0, 255, 0), 2)
         # ret, roiBinary = cv2.threshold(roi, 100, 255, cv2.THRESH_BINARY)
         roi.append(original_image[startY:endY, startX:endX])
         # todo
