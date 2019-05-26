@@ -13,3 +13,10 @@ def resize32(img, n):
     if (w%32 != 0): 
         w = w + (32 - (w%32))
     return (h,w)
+
+def resize_n(img, n):
+    if (len(img.shape) == 3):
+        (H,W) = img.shape[:2]
+    else:
+        (H,W) = img.shape
+    return (int(H/n), int(W/n))

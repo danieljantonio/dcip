@@ -1,3 +1,27 @@
+### 26/5
+
+
+### 19/5
+- added profanity_check together with the other parts of the code, got into some errors but is already solved 
+- in the attempt to fix profanity_check i changed the output of the function into 3 return values, the sentence, the category of the sentence (whether it has profanity (1) or not (0)), and the probability of it having profanity. note: i might add my own calculations on how the category works based on the probability
+
+### 17/5
+- found a profanity filter created by github user vzhou842 https://github.com/vzhou842/profanity-check
+- officially removed east.py from the final code
+- added the thresholding to bg_changes.py
+- tested output from bg_changes on tesseract_ocr, result is good. accuracy above 90% and is under 3 seconds
+- started combining everything together untill tesseract_ocr, showing an adequate accuracy 
+
+### 14/5
+- reading more about text detection/localization and found this link https://stackoverflow.com/questions/39078999/how-to-recognize-text-regions-using-histogram on recognizing text regions using histograms. the idea came after reading the paper by Devadeep Shyam on his proposed text detection technique
+
+### 13/5
+- added binary thresholding based on tesseract_ocr.py based on the mean of the pixels
+- considering to remove east.py as it does not perform as expected
+
+### 10/5
+- found out that pytesseract works really well with a chunk of text, and is better with white background
+
 ### 9/5
 - removed useless functions from east_resize
 - resize32 function now requires an n parameter for the divisible value of the image

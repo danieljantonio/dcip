@@ -34,7 +34,8 @@ def background_changes(new_frame, previous_frame, new_h=544, new_w=960):
     # cv2.imshow('closing', closing)
     erode = cv2.erode(closing, kernel, iterations=7)
     # cv2.imshow('erode', erode)
-    dilate = cv2.dilate(erode, kernel, iterations=2)
+    kernel = np.array([[0,0,0,0,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,0,0,0,0]], np.uint8)
+    dilate = cv2.dilate(erode, kernel, iterations=5)
     # cv2.imshow('dilate2', dilate)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
@@ -58,16 +59,18 @@ def background_changes(new_frame, previous_frame, new_h=544, new_w=960):
         x = end_x-start_x
         y = end_y-start_y
         if ( x > 150 and y > 150):
-            roi.append(original_frame[start_y:end_y, start_x:end_x])
-        # cv2.rectangle(boxesimg, (start_x, start_y), (end_x, end_y), (0, 255, 0), 2)
-
-    # rectsimg = cv2.resize(rectsimg, (new_w, new_h))
-    # boxesimg = cv2.resize(boxesimg, (new_w, new_h))
-    # cv2.imshow('rects', rectsimg)
-    # cv2.imshow('boxes', boxesimg)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+            img_frame = original_frame[start_y:end_y, start_x:end_x] 
+            img_frame = cv2.cvtColor(img_frame, cv2.COLOR_BGR2GRAY)
+            img_mean = int(img_frame.mean())
+            if img_mean > 127:
+                ret, thresh = cv2.threshold(img_frame, img_mean, 255, cv2.THRESH_BINARY)
+            else:
+                ret, thresh = cv2.threshold(img_frame, img_mean, 255, cv2.THRESH_BINARY_INV)
+            # cv2.imshow('im', thresh)
+            # cv2.waitKey(0)
+            # cv2.destroyAllWindows()
+            roi.append(thresh)
 
     fnEnd = time()
-    print('[info] bg_changes took  = {:.4f} seconds'.format(fnEnd-fnStart))
+    # print('[info] bg_changes took  = {:.4f} seconds'.format(fnEnd-fnStart))
     return roi
