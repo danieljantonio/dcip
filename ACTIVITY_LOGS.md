@@ -1,5 +1,10 @@
-### 26/5
+### 29/5
+- starting the implementation of smtp mailing system
 
+### 26/5
+- tested the system on real time, works nicely, does not take too much cpu processing power except for certain bursts of pytesseract. the python code itself only takes less than 20% of cpu processing power
+- if there is still time, it might be a good idea to find a way to decide if an image area contains text or not
+- changed screenshot.py grab() to screenshot all of the displays available. calculating the average of 100 screenshots, screenshotting increases the time by just over a double of the old time, the old time took 0.0487s on the first test and 0.0502 seconds on the second test, whereas screenshotting both of the images took 0.1056 seconds for the first time and 0.1012 seconds for the second time
 
 ### 19/5
 - added profanity_check together with the other parts of the code, got into some errors but is already solved 
