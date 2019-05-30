@@ -1,5 +1,10 @@
+### 30/5
+- added clear_old_cache(age) function to remove old functions that are older than 'age' compared to current time
+- the old system uses an if statement to check if there are too many active threads, this is now changed to a while loop that sleeps when the max number of threads has been reached until the threads has finished processing and has free up space
+
 ### 29/5
 - starting the implementation of smtp mailing system
+- successfully sent an email listing the profanity inducing sentences to the email
 
 ### 26/5
 - tested the system on real time, works nicely, does not take too much cpu processing power except for certain bursts of pytesseract. the python code itself only takes less than 20% of cpu processing power
