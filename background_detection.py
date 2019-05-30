@@ -72,5 +72,5 @@ def background_changes(new_frame, previous_frame, new_h=544, new_w=960):
             roi.append(thresh)
 
     fnEnd = time()
-    # print('[info] bg_changes took  = {:.4f} seconds'.format(fnEnd-fnStart))
+    # print('[info] background_detection took  = {:.4f} seconds'.format(fnEnd-fnStart))
     return roi

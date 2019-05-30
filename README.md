@@ -11,6 +11,14 @@ Supervised by
 Dr. Chia Wai Chong
 ```
 
+### installation
+make sure you have pip and pytesseract installed locally
+```
+pip3 install opencv-python
+pip3 install pytesseract
+pip3 install mss
+pip3 install numpy
+```
 
 ### Research
 - [ ] Dynamic threads in python

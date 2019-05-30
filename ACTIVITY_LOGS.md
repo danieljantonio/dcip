@@ -1,6 +1,8 @@
 ### 30/5
 - added clear_old_cache(age) function to remove old functions that are older than 'age' compared to current time
 - the old system uses an if statement to check if there are too many active threads, this is now changed to a while loop that sleeps when the max number of threads has been reached until the threads has finished processing and has free up space
+- cleaning up the folder and file structure of the code
+- email now sends an attachment of the time the screenshot is taken
 
 ### 29/5
 - starting the implementation of smtp mailing system
