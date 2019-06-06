@@ -3,8 +3,21 @@ from ocr_tesseract import recognize
 from profanity import sentence_check
 from time import time
 from email_service import send_email
+from split_image import split_image
+from threading import Thread
 
 def recognize_profanity(img, filename):
+    imgs = split_image(img)
+    threads = []
+    for im in imgs:
+        t = Thread(target=detect_profanity, args=(im, filename))
+        t.start()
+        threads.append(t)
+    for t in threads:
+        t.join()
+
+
+def detect_profanity(img, filename):
     print('[info] initiating text recognition')
     start = time()
     flags = []
@@ -16,4 +29,4 @@ def recognize_profanity(img, filename):
                 flags.append(s)
     if len(flags) > 0:
         send_email('djedidiaha@gmail.com', 'Daniel Antonio', flags, filename)
-    # print('[info] text recognition done in {:.3f} seconds'.format(time()-start))
+    print('[info] text recognition and profanity check done in {:.3f} seconds'.format(time()-start))

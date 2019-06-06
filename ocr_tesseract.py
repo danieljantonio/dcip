@@ -9,3 +9,4 @@ def recognize(img):
     for sentence in sentences:
         texts.append(sentence)
     return texts
+

@@ -1,3 +1,8 @@
+### 6/6
+- added a function to split an image into 2 without cutting the text
+- combined the function with the rest of the system
+- further tested the system
+
 ### 30/5
 - added clear_old_cache(age) function to remove old functions that are older than 'age' compared to current time
 - the old system uses an if statement to check if there are too many active threads, this is now changed to a while loop that sleeps when the max number of threads has been reached until the threads has finished processing and has free up space

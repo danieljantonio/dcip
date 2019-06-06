@@ -10,6 +10,11 @@ Supervised by
 ```
 Dr. Chia Wai Chong
 ```
+### run
+```
+# navigate to the folder containing ./dcip
+python3 dcip/
+```
 
 ### installation
 make sure you have pip and pytesseract installed locally
