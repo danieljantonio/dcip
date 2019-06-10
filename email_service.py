@@ -24,6 +24,7 @@ def send_email(receiver_email, receiver_name, flagged_text, filename):
     <html>
         <body>
             <h2> Potential cyberbullying detected in """ + receiver_name + """'s device </h2>
+            <p>Notice: Your child may be involved or may have witnessed cyberbullying in his device.</p>
             <p>Contents that have been flagged by our system: </p>
             <ul>"""
 
@@ -32,7 +33,7 @@ def send_email(receiver_email, receiver_name, flagged_text, filename):
 
     body = body + """
             </ul>
-            <i> Please review it on the file attached in this email and deal with it appropriately </i>
+            <i> Please review it on the file attached in this email and deal with it appropriately with love and care.</i>
         </body>
     </html>"""
     html_content = MIMEText(body,"html")
