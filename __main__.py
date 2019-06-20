@@ -27,7 +27,7 @@ if __name__ == '__main__':
     hits = 0
     print(asctime(localtime(fnStart)))
     while(True):
-        clear_old_cache(60)
+        clear_old_cache(120)
         start = time()
         filename = int(start)
         count += 1
@@ -53,5 +53,5 @@ if __name__ == '__main__':
         # print(hits)
         if ((end-start) < 1.5):
             sleep(1.5-(end-start))
-        # print('[info] time elapsed: {:.3f}'.format(end - start))
+        print('[info] time elapsed: {:.3f}'.format(time() - start))
 

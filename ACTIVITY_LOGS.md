@@ -1,3 +1,8 @@
+### 10/6
+- meeting with dr chia
+- redid the introduction, problem statement, etc. added a few more references
+- redid the objective
+
 ### 6/6
 - added a function to split an image into 2 without cutting the text
 - combined the function with the rest of the system

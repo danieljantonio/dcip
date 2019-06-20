@@ -1,13 +1,17 @@
 from imutils.object_detection import non_max_suppression # functions for openCV, packaging multiple functions based on one use
 import cv2
 import numpy as np
-from imutils import resize
+from resize import resize_n
 from time import time, sleep
 
-def background_changes(new_frame, previous_frame, new_h=544, new_w=960):
+def background_changes(new_frame, previous_frame):
+    
     fnStart = time()
     original_frame = new_frame.copy()
     (frame_h, frame_w) = original_frame.shape[:2]
+    new_h = int(frame_h/3)
+    new_w = int(frame_w/3)
+
     ratio_h = frame_h / new_h
     ratio_w = frame_w / new_w
 
@@ -26,17 +30,15 @@ def background_changes(new_frame, previous_frame, new_h=544, new_w=960):
     # cv2.imshow('fgmask', fgmask)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-
+    img_mean = int(fgmask.mean())
+    ret, thresh = cv2.threshold(fgmask, img_mean, 255, cv2.THRESH_BINARY)
     kernel = np.ones((3,5), np.uint8)
-    dilate = cv2.dilate(fgmask, kernel, iterations=2)
+    # cv2.imshow('thresh', thresh)
+    dilate = cv2.dilate(thresh, kernel, iterations=3)
     # cv2.imshow('dilate1', dilate)
-    closing = cv2.morphologyEx(dilate, cv2.MORPH_CLOSE, kernel)
-    # cv2.imshow('closing', closing)
-    erode = cv2.erode(closing, kernel, iterations=7)
+    # erode = cv2.erode(dilate, kernel, iterations=2)
     # cv2.imshow('erode', erode)
-    kernel = np.array([[0,0,0,0,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,0,0,0,0]], np.uint8)
-    dilate = cv2.dilate(erode, kernel, iterations=5)
-    # cv2.imshow('dilate2', dilate)
+    # kernel = np.ones((5,5), np.uint8)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
     contours,_ = cv2.findContours(dilate, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
