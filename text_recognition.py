@@ -3,9 +3,7 @@ from ocr_tesseract import recognize
 from profanity import sentence_check
 from time import time
 from email_service import send_email
-from split_image import split_image
 from threading import Thread
-from profanity_filter import filter
 
 
 

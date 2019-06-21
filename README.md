@@ -12,6 +12,20 @@ Dr. Chia Wai Chong
 ```
 ### installation
 make sure you have python, pip, and tesseract-ocr installed locally
+
+#### Linux
+```
+sudo apt install tesseract-ocr
+```
+#### MacOS
+```
+brew install tesseract
+```
+
+#### Windows
+https://github.com/UB-Mannheim/tesseract/wiki
+
+
 ```
 pip install opencv-python
 pip install mss
@@ -22,15 +36,7 @@ pip install profanity_check
 
 ### run
 ```
-# navigate to the folder containing ./dcip
-python3 dcip/
+cd dcip
 mkdir .cache
+python __main__.py
 ```
-
-### Research
-- [ ] Dynamic threads in python
-- [ ] How much load does each thread add, is it worthed to use threads in consideration of performance, time, and power consumption?
-- [ ] How to speed up an area with huge chunks of text
-- [ ] EAST text detection using binary image
-- [ ] How long does it take to binary threshold a small image
-- [ ] Detect areas where the text is chunked together (try to increase the padding, then use non_max_suppression with a lower overlapThresh)
