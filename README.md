@@ -10,19 +10,21 @@ Supervised by
 ```
 Dr. Chia Wai Chong
 ```
+### installation
+make sure you have python, pip, and tesseract-ocr installed locally
+```
+pip install opencv-python
+pip install mss
+pip install imutils
+pip install pytesseract
+pip install profanity_check
+```
+
 ### run
 ```
 # navigate to the folder containing ./dcip
 python3 dcip/
-```
-
-### installation
-make sure you have pip and pytesseract installed locally
-```
-pip3 install opencv-python
-pip3 install pytesseract
-pip3 install mss
-pip3 install numpy
+mkdir .cache
 ```
 
 ### Research
